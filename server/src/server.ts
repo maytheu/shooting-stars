@@ -3,12 +3,12 @@ import { createServer } from "http";
 import { PrismaClient } from "@prisma/client";
 
 import { env } from "./config/validate";
-// import App from "./App";
+import App from "./App";
 
 const port = env.PORT;
-// const httpApp = App.app;
+const httpApp = App.app;
 
-const httpServer = createServer();
+const httpServer = createServer(httpApp);
 
 export const prisma = new PrismaClient();
 

@@ -12,3 +12,45 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Announcement {
+  id               Int      @id @default(autoincrement())
+  image            String
+  post             String
+  publish          Boolean  @default(false)
+  showAnnouncement Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
+}
+
+model mainCategory {
+  id           Int        @id @default(autoincrement())
+  title        String
+  publish      Boolean    @default(false)
+  publications Category[]
+}
+
+model Category {
+  id             Int           @id @default(autoincrement())
+  image          String
+  post           String
+  publish        Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @default(now())
+  mainCategory   mainCategory? @relation(fields: [mainCategoryId], references: [id])
+  mainCategoryId Int?
+}
+
+model User {
+  id      Int    @id @default(autoincrement())
+  name    String
+  address String
+  role    Role   @relation(fields: [roleId], references: [id])
+  roleId  Int
+}
+
+model Role {
+  id   Int    @id @default(autoincrement())
+  name String
+  User User[]
+}
