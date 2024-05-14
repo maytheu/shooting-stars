@@ -23,7 +23,7 @@ model Announcement {
   updatedAt        DateTime @default(now())
 }
 
-model mainCategory {
+model MainCategory {
   id           Int        @id @default(autoincrement())
   title        String
   publish      Boolean    @default(false)
@@ -37,7 +37,7 @@ model Category {
   publish        Boolean       @default(false)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @default(now())
-  mainCategory   mainCategory? @relation(fields: [mainCategoryId], references: [id])
+  mainCategory   MainCategory? @relation(fields: [mainCategoryId], references: [id])
   mainCategoryId Int?
 }
 
